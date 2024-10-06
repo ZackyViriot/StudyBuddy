@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // for backend routes 
 import axios from 'axios';
 
@@ -10,6 +11,7 @@ export default function SignUpForm() {
     confirmPassword: "",
   })
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -25,6 +27,7 @@ export default function SignUpForm() {
       const res = await axios.post('http://localhost:8000/auth/signup',formData);
       const token = res.data.token;
       localStorage.setItem('token',token)
+      navigate('/userDashboard')
     }catch(err){
       console.log("Error with signing up",err)
     }

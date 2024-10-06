@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 // to connect to backend need axios 
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   })
+  const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -22,9 +24,12 @@ export default function LoginForm() {
       const token = res.data.token;
       // need to set to local storage to be able to use it throught the application.
       localStorage.setItem('token',token)
+      navigate('/userDashboard')
     }catch(err){
       setError("Invalid Credi")
     }
+
+
   };
 
   return (
