@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import {useNavigate} from 'react-router-dom';
 import UserDashboardHeader from "./UserDashboardHeader";
 import SideNavigationBar from "./sideNavigation/SideNavigationBar";
+import UserStudyGroupsDashboardComponent from "./userStudyGroups/UserStudyGroupsDashboardComponent";
 
 interface User {
     email:string;
@@ -51,6 +52,7 @@ export default function UserDashboard(){
         <div className="min-h-screen bg-gray-100">
             <UserDashboardHeader/>
             <SideNavigationBar/>
+            <UserStudyGroupsDashboardComponent/>
         </div>
     )
 }
