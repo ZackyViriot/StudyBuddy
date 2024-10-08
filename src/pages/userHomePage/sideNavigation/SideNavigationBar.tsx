@@ -17,8 +17,7 @@ export default function SideNavigationBar() {
 
 
     return (
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 hover:scale-105 transition-transform duration-200">
-                <div className="flex flex-col md:flex-row">
+            <div className="flex hover:scale-105 transition-transform duration-200">
                     <nav className="md:w-64   bg-white shadow rounded-lg p-6 mr-6 mb-6 md:mb-0">
                         <ul>
                             <li className="mb-3">
@@ -27,9 +26,10 @@ export default function SideNavigationBar() {
                             <li className="mb-3">
                                 <a href="#" className="text-gray-600 hover:text-gray-800">My Groups</a>
                             </li>
-                            <li className="mb-3">
+                            {/* <li className="mb-3">
                                 <a href="#" className="text-gray-600 hover:text-gray-800">Find Groups</a>
-                            </li>
+                            </li> */}
+                            {/* For now we wont have this because we are going to be able to search for a group on the user dashboard */}
                             <li className="mb-3">
                                 <a href='/createGroup' className="text-gray-600 hover:text-gray-800">Create Group</a>
                             </li>
@@ -39,7 +39,6 @@ export default function SideNavigationBar() {
                         </ul>
                     </nav>
                 </div>
-            </div>
 
     )
 }
