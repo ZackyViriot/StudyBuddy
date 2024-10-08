@@ -2,6 +2,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import UserStudyGroupsCardDashboard from './UserStudyGroupCardDashboard';
 
 
 
@@ -49,7 +50,7 @@ export default function UserStudyGroupsDashboardComponent(){
 
     return ( 
         <div>
-            LAL
+            <UserStudyGroupsCardDashboard studyGroups = {studyGroup}/>
         </div>
     )
 }
