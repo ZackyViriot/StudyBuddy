@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import UserDashboardHeader from "./UserDashboardHeader";
 import SideNavigationBar from "./sideNavigation/SideNavigationBar";
 import UserStudyGroupsDashboardComponent from "./userStudyGroups/UserStudyGroupsDashboardComponent";
+import SearchForStudyGroupCard from "./searchStudyGroup/SearchForStudyGroupCard";
 
 interface User {
     email: string;
@@ -52,9 +53,12 @@ export default function UserDashboard() {
         <div className="min-h-screen bg-gray-100">
         <UserDashboardHeader />
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row">
+                <div className="flex flex-col md:flex-row gap-x-5  ">
                     <SideNavigationBar />
+
                     <UserStudyGroupsDashboardComponent />
+                    <SearchForStudyGroupCard/>
+
                 </div>
             </div>
         </div>

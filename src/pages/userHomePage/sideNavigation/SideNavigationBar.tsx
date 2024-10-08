@@ -23,9 +23,10 @@ export default function SideNavigationBar() {
                             <li className="mb-3">
                                 <a href="#" className="text-blue-600 hover:text-blue-800">Dashboard</a>
                             </li>
-                            <li className="mb-3">
+                            {/* <li className="mb-3">
                                 <a href="#" className="text-gray-600 hover:text-gray-800">My Groups</a>
-                            </li>
+                            </li> */}
+                            {/* we will eventually create its own page for it but for now no */}
                             {/* <li className="mb-3">
                                 <a href="#" className="text-gray-600 hover:text-gray-800">Find Groups</a>
                             </li> */}
