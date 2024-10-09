@@ -8,7 +8,7 @@ interface StudyGroup {
   meetingLocation: string;
   major: string;
   name?: string;
-  members?: number;
+  members?: string[];
 }
 
 interface UserStudyGroupsCardDashboardProps {
@@ -34,11 +34,11 @@ export default function UserStudyGroupsCardDashboard({ studyGroups }: UserStudyG
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
-  const groupsToRender = Array(3).fill(null).map((_, index) => currentGroups[index] || null);
+  const groupsToRender = Array(4).fill(null).map((_, index) => currentGroups[index] || null);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-3xl mx-auto">
-      <div className="p-4">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-3xl mx-auto  w-full h-[600px]">
+      <div className="p-4 h-full">
         <h2 className="text-xl font-bold text-gray-800 mb-3">Your Study Groups</h2>
         <ul className="space-y-2">
           {groupsToRender.map((group, index) => (
@@ -47,12 +47,12 @@ export default function UserStudyGroupsCardDashboard({ studyGroups }: UserStudyG
                 <div className="flex justify-between items-start h-full">
                   <div>
                     <h3 className="text-md font-semibold text-gray-800 mb-1">{group.name || group.major}</h3>
-                    <div className="text-xs text-gray-600 mb-1">
+                    {/* <div className="text-xs text-gray-600 mb-1">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                       <span>{group.members || "N/A"} members</span>
-                    </div>
+                    </div> */}
                     <div className="text-xs text-gray-600 mb-1">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

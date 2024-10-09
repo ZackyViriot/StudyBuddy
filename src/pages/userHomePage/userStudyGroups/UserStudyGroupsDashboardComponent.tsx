@@ -1,56 +1,58 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserStudyGroupsCardDashboard from './UserStudyGroupCardDashboard';
 
+interface StudyGroup {
+  _id: string;
+  name?: string;
+  meetingType: string;
+  meetingDays: string[];
+  meetingLocation: string;
+  major: string;
+  members: string[];  // Change this to an array of strings
+}
 
+export default function UserStudyGroupsDashboardComponent() {
+  const [userId, setUserId] = useState("");
+  const [studyGroups, setStudyGroups] = useState<StudyGroup[]>([]);
+  const navigate = useNavigate();
 
-
-export default function UserStudyGroupsDashboardComponent(){
-    const [userId,setUserId] = useState("");
-    const [studyGroup,setStudyGroup] = useState<any[]>([])
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        //need to fetch the infromation about the study groups as well
-        const fetchUserInfo = async () => {
-            try{
-                const token = localStorage.getItem("token")
-                if(!token){
-                    throw new Error("No Token found");
-                }
-                const decoded: any = jwtDecode(token);
-                const userId = decoded.id;
-                setUserId(userId)
-                // this is where we make the call to receive the information.
-                const res = await axios.get(`http://localhost:8000/studyGroup/getUserStudyGroups?userId=${userId}`,{
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-
-                setStudyGroup(res.data);
-                console.log(studyGroup)
-
-
-            }catch(error){
-                console.error("Failed to fetch user infromation")
-            }
-           
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No Token found");
         }
+        const decoded: any = jwtDecode(token);
+        const userId = decoded.id;
+        setUserId(userId);
 
-        fetchUserInfo();
-    },[])
+        const res = await axios.get(`http://localhost:8000/studyGroup/getUserStudyGroups?userId=${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
 
-    //some things that we are going to have to do we are going to have to get the user information and fetch the studygroups and we should do this at the beginging of the page render 
+        setStudyGroups(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.error("Failed to fetch user information", error);
+      }
+    };
 
+    fetchUserInfo();
+  }, []);
 
-
-
-    return ( 
-        <div>
-            <UserStudyGroupsCardDashboard studyGroups = {studyGroup}/>
-        </div>
-    )
+  return (
+    <div>
+      {studyGroups.length > 0 ? (
+        <UserStudyGroupsCardDashboard studyGroups={studyGroups} />
+      ) : (
+        <p>You are not part of any study groups yet.</p>
+      )}
+    </div>
+  );
 }

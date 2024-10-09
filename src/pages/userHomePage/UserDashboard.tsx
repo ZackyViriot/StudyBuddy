@@ -55,10 +55,8 @@ export default function UserDashboard() {
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row gap-x-5  ">
                     <SideNavigationBar />
-
                     <UserStudyGroupsDashboardComponent />
                     <SearchForStudyGroupCard/>
-
                 </div>
             </div>
         </div>
