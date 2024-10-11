@@ -101,6 +101,10 @@ export default function SearchStudyGroupsCard() {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
+  const handleGoToChat = (groupId: string) => {
+    navigate(`/chat/${groupId}`);
+  };
+
   const groupsToRender = Array(3).fill(null).map((_, index) => currentGroups[index] || null);
 
   return (
@@ -148,6 +152,12 @@ export default function SearchStudyGroupsCard() {
                   >
                     Join Group
                   </button>
+                  <button
+                      onClick={() => handleGoToChat(group._id)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded"
+                    >
+                      Go to Chat
+                    </button>
                 </div>
               </div>
             ) : (

@@ -7,6 +7,8 @@ import UserDashboard from "./pages/userHomePage/UserDashboard";
 import CreateStudyGroupPage from "./pages/createStudyGroupPage/CreateStudyGroupPage";
 // need to make some protected routes that are only avilable if you have user token. 
 import PrivateRoute from "./PrivateRoute";
+import StudyGroupChat from "./pages/chatRoom/ChatComponent";
+
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/UserDashboard' element={<UserDashboard />} />
           <Route path = '/createGroup' element = {<CreateStudyGroupPage/>}/>
+          <Route path='/chat/:studyGroupId' element = {<StudyGroupChat/>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>

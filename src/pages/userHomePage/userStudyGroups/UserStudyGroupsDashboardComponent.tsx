@@ -11,12 +11,14 @@ interface StudyGroup {
   meetingDays: string[];
   meetingLocation: string;
   major: string;
-  members: string[];  // Change this to an array of strings
+  members: string[];
 }
 
 export default function UserStudyGroupsDashboardComponent() {
   const [userId, setUserId] = useState("");
   const [studyGroups, setStudyGroups] = useState<StudyGroup[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,21 +32,38 @@ export default function UserStudyGroupsDashboardComponent() {
         const userId = decoded.id;
         setUserId(userId);
 
-        const res = await axios.get(`http://localhost:8000/studyGroup/getUserStudyGroups?userId=${userId}`, {
+        const res = await axios.get(`http://localhost:8000/studyGroup/user?userId=${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        setStudyGroups(res.data);
-        console.log(res.data);
+        console.log("Received study groups:", res.data);
+
+        if (Array.isArray(res.data)) {
+          setStudyGroups(res.data);
+        } else {
+          console.error("Unexpected response format:", res.data);
+          setError("Received unexpected data format from server");
+        }
       } catch (error) {
-        console.error("Failed to fetch user information", error);
+        console.error("Failed to fetch user study groups", error);
+        setError("Failed to fetch study groups. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserInfo();
   }, []);
+
+  if (loading) {
+    return <p>Loading your study groups...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div>

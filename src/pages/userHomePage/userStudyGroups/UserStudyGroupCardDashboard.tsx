@@ -18,7 +18,7 @@ interface UserStudyGroupsCardDashboardProps {
 export default function UserStudyGroupsCardDashboard({ studyGroups }: UserStudyGroupsCardDashboardProps) {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const groupsPerPage = 3;
+  const groupsPerPage = 4;
 
   const indexOfLastGroup = currentPage * groupsPerPage;
   const indexOfFirstGroup = indexOfLastGroup - groupsPerPage;
@@ -32,6 +32,10 @@ export default function UserStudyGroupsCardDashboard({ studyGroups }: UserStudyG
 
   const prevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+   const handleGoToChat = (groupId: string) => {
+    navigate(`/chat/${groupId}`);
   };
 
   const groupsToRender = Array(4).fill(null).map((_, index) => currentGroups[index] || null);
@@ -67,10 +71,21 @@ export default function UserStudyGroupsCardDashboard({ studyGroups }: UserStudyG
                       <span>{group.meetingDays.join(", ")}</span>
                     </div>
                   </div>
+                  <div className="flex flex-col gap-10 items-end">
+
                   <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded">
                     {group.major}
                   </span>
+                  <button
+                      onClick={() => handleGoToChat(group._id)}
+                      className="bg-black hover:bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded"
+                    >
+                      Go to Chat
+                    </button>
+                  </div>
+                 
                 </div>
+                
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-400 text-sm">
                   No study group

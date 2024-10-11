@@ -58,28 +58,34 @@ export default function CreateStudyGroupForm() {
         }));
     };
 
-    const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const data = {
             ...studyGroup,
             userId
-        }
+        };
 
-        //now for the connection to the backend 
         try {
-            console.log(data);
-            const res = await axios.post('http://localhost:8000/studyGroup/create',data,{
+            console.log("Sending data:", data);
+            const res = await axios.post('http://localhost:8000/studyGroup', data, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` // Add token for authentication
                 },
-            })
-            console.log(res.data);
-            navigate('/userDashboard')
-        }catch(err){
-            console.error("Error with post form",err)
+            });
+            console.log("Response:", res.data);
+            navigate('/userDashboard');
+        } catch (err) {
+            if (axios.isAxiosError(err)) {
+                console.error("Error response:", err.response?.data);
+                console.error("Error status:", err.response?.status);
+            } else {
+                console.error("Unexpected error:", err);
+            }
+            // Optionally, set an error state here to display to the user
         }
-    }
+    };
 
 
 
