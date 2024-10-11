@@ -29,7 +29,7 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <div className="w-full max-w-sm space-y-2">
-                  <form className="flex space-x-2">
+                  {/* <form className="flex space-x-2">
                     <input 
                       className="flex-1 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black" 
                       placeholder="Enter your subject" 
@@ -41,7 +41,7 @@ export default function LandingPage() {
                     >
                       Find Groups
                     </button>
-                  </form>
+                  </form> */}
                 </div>
               </div>
               <div className="flex items-center justify-center">
