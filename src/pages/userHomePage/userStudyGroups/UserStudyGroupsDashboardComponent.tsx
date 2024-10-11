@@ -67,11 +67,7 @@ export default function UserStudyGroupsDashboardComponent() {
 
   return (
     <div>
-      {studyGroups.length > 0 ? (
         <UserStudyGroupsCardDashboard studyGroups={studyGroups} />
-      ) : (
-        <p>You are not part of any study groups yet.</p>
-      )}
     </div>
   );
 }

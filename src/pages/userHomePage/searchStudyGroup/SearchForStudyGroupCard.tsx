@@ -53,7 +53,7 @@ export default function SearchStudyGroupsCard() {
   };
 
   const handleAddStudyGroup = () => {
-    navigate('/add-study-group');
+    navigate('/createGroup');
   };
 
  
@@ -81,7 +81,7 @@ export default function SearchStudyGroupsCard() {
         )
       );
 
-      alert("Successfully joined the group!");
+      window.location.reload()
     } catch (error) {
       console.error("Error joining study group:", error);
       alert("Failed to join the group. Please try again.");
