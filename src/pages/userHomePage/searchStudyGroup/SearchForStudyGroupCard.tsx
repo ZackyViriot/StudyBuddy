@@ -148,7 +148,7 @@ export default function SearchStudyGroupsCard() {
                   </span>
                   <button
                     onClick={() => handleJoinGroup(group._id)}
-                    className="bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-1 px-2 rounded"
+                    className="bg-green-500 m-1 hover:bg-green-600 text-white text-xs font-bold py-1 px-2 rounded"
                   >
                     Join Group
                   </button>
