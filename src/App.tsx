@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // all pages with my routed through here. 
 import Home from "./pages/Home";
 import LandingPage from "./pages/landingPage/LandingPage";
-import UserDashboard from "./pages/userHomePage/UserDashboard";
+import UserDashboard from "./pages/userDashboard/UserDashboard";
 import CreateStudyGroupPage from "./pages/createStudyGroupPage/CreateStudyGroupPage";
 // need to make some protected routes that are only avilable if you have user token. 
 import PrivateRoute from "./PrivateRoute";
