@@ -13,7 +13,12 @@ interface Event {
   status: string;
 }
 
-export default function AddEventForm() {
+interface AddEventFormProps {
+  onClose: () => void;
+  onEventAdded?: () => void;
+}
+
+export default function AddEventForm({ onEventAdded, onClose }: AddEventFormProps) {
   const navigate = useNavigate();
   const [userId, setUserId] = useState('');
   const [event, setEvent] = useState<Event>({
@@ -76,23 +81,22 @@ export default function AddEventForm() {
     const payload = {
       title: event.title,
       description: event.description || '',
-      start: new Date(event.start).toISOString(),  // Convert to ISO string
-      end: new Date(event.end).toISOString(),      // Convert to ISO string
+      start: new Date(event.start).toISOString(),
+      end: new Date(event.end).toISOString(),
       color: event.color,
       status: event.status,
       userId
     };
   
     try {
-      console.log('Sending payload:', payload);
       const res = await axios.post('http://localhost:8000/Event', payload, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        // Remove transformRequest as we're now sending ISO strings directly
       });
       
+      onEventAdded?.();
       navigate('/userDashboard');
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -105,8 +109,10 @@ export default function AddEventForm() {
       }
     } finally {
       setIsSubmitting(false);
+      window.location.reload()
     }
   };
+
   return (
     <div className="bg-white rounded-lg overflow-hidden">
       <form onSubmit={handleSubmit} className="space-y-3">
@@ -213,7 +219,14 @@ export default function AddEventForm() {
           </div>
         )}
 
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800 transition-colors duration-200"
+          >
+            Close
+          </button>
           <button
             type="submit"
             disabled={isSubmitting}
