@@ -30,25 +30,31 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <div className="w-full bg-black shadow">
         <UserDashboardHeader />
       </div>
 
-      <div className="container mx-auto mt-20  px-2 max-w-4xl">
-        {/* Calendar Section */}
-        <div className="mb-4">
-          <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow">
-            <div className="p-3">
-              <UserCalendar onAddEventClick={() => setShowEventModal(true)} />
+      <div className="container mx-auto mt-20 px-4 max-w-7xl">
+        <div className="flex flex-row space-x-6 h-[calc(100vh-12rem)]">
+          {/* Study Groups - Left Side */}
+          <div className="w-1/3">
+            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-full overflow-auto">
+              <div className="p-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Study Groups</h2>
+                <UserStudyGroups />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Study Groups */}
-        <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow">
-          <div className="p-2">
-            <UserStudyGroups />
+          {/* Calendar Section - Right Side */}
+          <div className="w-2/3">
+            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-full overflow-auto">
+              <div className="p-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Calendar</h2>
+                <UserCalendar onAddEventClick={() => setShowEventModal(true)} />
+              </div>
+            </div>
           </div>
         </div>
 
