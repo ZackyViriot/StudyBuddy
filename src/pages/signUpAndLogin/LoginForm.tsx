@@ -26,7 +26,7 @@ export default function LoginForm() {
       localStorage.setItem('token',token)
       navigate('/userDashboard')
     }catch(err){
-      setError("Invalid Credi")
+      setError("Invalid Login")
     }
 
 
