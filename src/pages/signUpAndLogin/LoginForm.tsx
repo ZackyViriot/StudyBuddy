@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 // to connect to backend need axios 
-import axios from 'axios'
+
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../axios/axiosSetup";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
@@ -18,19 +19,18 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Add your login logic here when we add backend 
     try {
-      // Try both URLs simultaneously and use whichever responds first
-      const res = await Promise.race([
-        axios.post('http://localhost:8000/auth/login', formData),
-        axios.post('studybuddy-production-1dcc.up.railway.app/auth/login', formData)
-      ]);
-      
+      const res = await axiosInstance.post('/auth/login',formData);
       const token = res.data.token;
-      localStorage.setItem('token', token);
-      navigate('/userDashboard');
-    } catch (err) {
-      setError("Invalid Login");
+      // need to set to local storage to be able to use it throught the application.
+      localStorage.setItem('token',token)
+      navigate('/userDashboard')
+    }catch(err){
+      setError("Invalid Login")
     }
+
+
   };
 
   return (
