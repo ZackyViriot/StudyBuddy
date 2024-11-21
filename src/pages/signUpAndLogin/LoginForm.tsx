@@ -18,18 +18,19 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your login logic here when we add backend 
     try {
-      const res = await axios.post('http://localhost:8000/auth/login',formData);
+      // Try both URLs simultaneously and use whichever responds first
+      const res = await Promise.race([
+        axios.post('http://localhost:8000/auth/login', formData),
+        axios.post('https://study-buddy-backend-ivory.vercel.app/auth/login', formData)
+      ]);
+      
       const token = res.data.token;
-      // need to set to local storage to be able to use it throught the application.
-      localStorage.setItem('token',token)
-      navigate('/userDashboard')
-    }catch(err){
-      setError("Invalid Login")
+      localStorage.setItem('token', token);
+      navigate('/userDashboard');
+    } catch (err) {
+      setError("Invalid Login");
     }
-
-
   };
 
   return (
