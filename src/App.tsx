@@ -8,7 +8,7 @@ import CreateStudyGroupPage from "./pages/createStudyGroupPage/CreateStudyGroupP
 // need to make some protected routes that are only avilable if you have user token. 
 import PrivateRoute from "./PrivateRoute";
 import StudyGroupChat from "./pages/chatRoom/ChatComponent";
-import PlannerPage from "./pages/plannerPage/plannerPageComponents /PlannerPage";
+import PlannerPage from "./pages/plannerPage/plannerPageComponents/PlannerPage";
 
 
 function App() {
