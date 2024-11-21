@@ -3,9 +3,7 @@ import { BookOpen, Users, Calendar, Search, MapPin, Mail, Phone } from "lucide-r
 
 
 
-
-
-export default function UserDashboardHeader() {
+export default function PlannerPageHeader(){
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 lg:px-6 h-16 flex items-center">
             <div className="container mx-auto flex justify-between items-center">

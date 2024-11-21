@@ -7,7 +7,6 @@ import UniversityMovingGallery from "./LandingPageComponents/UniversityMovingGal
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('login')
-  //need to add some state for the contact us section 
   const [formStatus, setFormStatus] = useState('');
   const [formData, setFormData] = useState({
     name: "",
@@ -16,7 +15,6 @@ export default function LandingPage() {
   })
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
 
   const handleFormChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -52,202 +50,190 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-black">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 lg:px-6 h-16 flex items-center">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <BookOpen className="h-8 w-8 text-black" />
-            <span className="ml-2 text-2xl font-bold text-black">StudyBuddy</span>
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md animate-fade-down opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards]">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="text-xl font-bold">StudyBuddy</div>
+            <nav className="hidden md:flex space-x-8">
+              <a href="#about" className="hover:text-gray-600">About</a>
+              <a href="#features" className="hover:text-gray-600">Features</a>
+              <a href="#contact" className="hover:text-gray-600">Contact</a>
+            </nav>
           </div>
-          <nav className="hidden md:flex space-x-4">
-            <a href="#about" className="text-sm font-medium hover:text-blue-600">About</a>
-            <a href="#features" className="text-sm font-medium hover:text-blue-600">Features</a>
-            <a href="#contact" className="text-sm font-medium hover:text-blue-600">Contact</a>
-          </nav>
         </div>
       </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-12 lg:py-12 xl:py-12 bg-gray-100">
+
+      <main className="flex-1 pt-16">
+        {/* Hero Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
           <div className="container mx-auto px-4 md:px-6">
-
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-
-              <div className="flex flex-col justify-center space-y-4">
-
-                <div className="space-y-2">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
-                    Find your perfect study group
-                  </h1>
-                  <p className="max-w-[600px] text-gray-600 md:text-xl">
-                    Connect with like-minded students, share knowledge, and ace your exams together. Join StudyBuddy today!
-                  </p>
-                </div>
-                <div className="w-full max-w-sm space-y-2">
-                  {/* <form className="flex space-x-2">
-                    <input 
-                      className="flex-1 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black" 
-                      placeholder="Enter your subject" 
-                      type="text" 
-                    />
-                    <button 
-                      type="submit" 
-                      className="px-4 py-2 bg-black text-white font-bold text-sm rounded-md hover:bg-gray-800 transition-colors"
-                    >
-                      Find Groups
-                    </button>
-                  </form> */}
-                </div>
+            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+              {/* Left side content */}
+              <div className="flex flex-col justify-center space-y-4 animate-fade-right opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards]">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                  Find Your Perfect Study Group
+                </h1>
+                <p className="max-w-[600px] text-gray-500 md:text-xl">
+                  Connect with fellow students, share knowledge, and excel together. Join StudyBuddy today!
+                </p>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg border mt-10 mb-10 border-gray-200">
-                  <div className="flex mb-4">
+
+              {/* Login/Signup Form */}
+              <div className="flex items-center justify-center animate-fade-left opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards]">
+                <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
+                  <div className="flex mb-4 border-b">
                     <button
-                      className={`flex-1 py-2 text-center ${activeTab === "login"
-                        ? "border-b-2 border-black text-black"
-                        : "text-gray-500"
-                        }`}
-                      onClick={() => setActiveTab("login")}
+                      className={`flex-1 py-2 text-center ${activeTab === 'login' ? 'border-b-2 border-black' : ''}`}
+                      onClick={() => setActiveTab('login')}
                     >
                       Login
                     </button>
                     <button
-                      className={`flex-1 py-2 text-center ${activeTab === "signup"
-                        ? "border-b-2 border-black text-black"
-                        : "text-gray-500"
-                        }`}
-                      onClick={() => setActiveTab("signup")}
+                      className={`flex-1 py-2 text-center ${activeTab === 'signup' ? 'border-b-2 border-black' : ''}`}
+                      onClick={() => setActiveTab('signup')}
                     >
                       Sign Up
                     </button>
                   </div>
-                  {activeTab === "login" ? <LoginForm /> : <SignUpForm />}
+                  {activeTab === 'login' ? <LoginForm /> : <SignUpForm />}
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section id='about' className="w-full py-12 bg-white">
-          <div className="container mx-auto px-4 mt-5 md:px-6">
-            <h2 className="text-3xl font-bold text-center mb-8"> About StudyBuddy</h2>
-          </div>
-          <div className="grid gap-6 items-center">
-            <div className="flex flex-col justify-center space-y-4">
-              <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto">
-                StudyBuddy is a platform designed to help students connect, collaborate, and excel in their academic pursuits.
-                We believe that learning is more effective and enjoyable when done together. Our mission is to create a
-                global community of learners who support and inspire each other to achieve their educational goals.
-              </p>
-            </div>
-          </div>
-        </section>
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl font-bold text-center mb-8">Why Choose StudyBuddy?</h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="flex flex-col items-center text-center p-4">
-                <Users className="h-12 w-12 text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Find Your Tribe</h3>
-                <p className="text-gray-600">Connect with students who share your academic interests and goals.</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-4">
-                <Calendar className="h-12 w-12 text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Flexible Scheduling</h3>
-                <p className="text-gray-600">Organize study sessions that fit everyone's timetable.</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-4">
-                <MapPin className="h-12 w-12 text-blue-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Virtual & In-Person</h3>
-                <p className="text-gray-600">Choose between online and face-to-face study groups.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section>
-          <div className="bg-gray-50">
-            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-              <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-                <span className="block">Participating Universities</span>
-              </h2>
-              <div className="mt-6">
-                <UniversityMovingGallery />
+        {/* About Section */}
+        <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-white animate-fade-up opacity-0 [animation-delay:800ms] [animation-fill-mode:forwards]">
+          <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-3xl font-bold text-center mb-8">About StudyBuddy</h2>
+            <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto">
+              StudyBuddy is your ultimate platform for connecting with fellow students and forming effective study groups.
+              Whether you're preparing for exams, working on projects, or seeking academic support, we're here to help you succeed.
+            </p>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+          <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-3xl font-bold text-center mb-12 animate-fade-up opacity-0 [animation-delay:1000ms] [animation-fill-mode:forwards]">
+              Why Choose StudyBuddy?
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg animate-fade-up opacity-0 [animation-delay:1200ms] [animation-fill-mode:forwards]">
+                <BookOpen className="w-12 h-12 mb-4 text-black" />
+                <h3 className="text-xl font-bold mb-2">Smart Matching</h3>
+                <p className="text-gray-600">Find study partners based on your courses, study style, and schedule.</p>
+              </div>
+              <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg animate-fade-up opacity-0 [animation-delay:1400ms] [animation-fill-mode:forwards]">
+                <Users className="w-12 h-12 mb-4 text-black" />
+                <h3 className="text-xl font-bold mb-2">Group Management</h3>
+                <p className="text-gray-600">Easily organize and manage your study groups in one place.</p>
+              </div>
+              <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg animate-fade-up opacity-0 [animation-delay:1600ms] [animation-fill-mode:forwards]">
+                <Calendar className="w-12 h-12 mb-4 text-black" />
+                <h3 className="text-xl font-bold mb-2">Schedule Coordination</h3>
+                <p className="text-gray-600">Coordinate meeting times that work for everyone in your group.</p>
               </div>
             </div>
           </div>
         </section>
-        <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+
+        {/* Universities Section */}
+        <section className="py-12 md:py-24 bg-white animate-fade-up opacity-0 [animation-delay:1800ms] [animation-fill-mode:forwards]">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">Trusted by Students at Top Universities</h2>
+            <UniversityMovingGallery />
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 animate-fade-up opacity-0 [animation-delay:2000ms] [animation-fill-mode:forwards]">
           <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
-            <div className="grid gap-6 md:grid-cols-2 items-center">
+            <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
+            <div className="grid gap-8 md:grid-cols-2">
+              {/* Contact Form */}
               <div className="space-y-4">
-                <p className="text-xl text-gray-600">
-                  Have questions or suggestions? We'd love to hear from you!
-                </p>
-                <div className="flex items-center space-x-2">
-                  <Mail className="h-5 w-5 text-blue-600" />
-                  <span>support@studybuddy.com</span>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFormChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      rows={4}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
+                    disabled={formStatus === 'sending'}
+                  >
+                    {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
+                  </button>
+                  {formStatus === 'success' && (
+                    <p className="text-green-600">Message sent successfully!</p>
+                  )}
+                  {formStatus === 'error' && (
+                    <p className="text-red-600">Failed to send message. Please try again.</p>
+                  )}
+                </form>
+              </div>
+
+              {/* Contact Information */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <MapPin className="w-6 h-6" />
+                  <span>123 University Ave, City, State 12345</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-5 w-5 text-blue-600" />
-                  <span>+1 (555) 123-4567</span>
+                <div className="flex items-center space-x-4">
+                  <Mail className="w-6 h-6" />
+                  <span>contact@studybuddy.com</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Phone className="w-6 h-6" />
+                  <span>(123) 456-7890</span>
                 </div>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-            focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
-                  placeholder="Your Name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleFormChange}
-                  required
-                />
-                <input
-                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-            focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
-                  placeholder="Your Email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleFormChange}
-                  required
-                />
-                <textarea
-                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-            focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
-                  rows={4}
-                  placeholder="Your Message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleFormChange}
-                  required
-                ></textarea>
-                <button
-                  type="submit"
-                  disabled={formStatus === 'sending'}
-                  className="w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800 
-            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:bg-gray-400"
-                >
-                  {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-                </button>
-                {formStatus === 'success' && (
-                  <p className="text-green-600 text-center">Message sent successfully!</p>
-                )}
-                {formStatus === 'error' && (
-                  <p className="text-red-600 text-center">Failed to send message. Please try again.</p>
-                )}
-              </form>
             </div>
           </div>
         </section>
       </main>
-      <footer className="py-6 border-t border-gray-200">
-        <div className="container mx-auto px-4 md:px-6">
-          <p className="text-center text-gray-600 text-sm">
-            © 2024 StudyBuddy. All rights reserved.
-          </p>
+
+      {/* Footer */}
+      <footer className="py-6 bg-white border-t animate-fade-up opacity-0 [animation-delay:2200ms] [animation-fill-mode:forwards]">
+        <div className="container mx-auto px-4 text-center text-gray-600">
+          <p>&copy; 2024 StudyBuddy. All rights reserved.</p>
         </div>
       </footer>
     </div>
-  )
+  );
 }
