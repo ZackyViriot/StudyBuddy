@@ -22,7 +22,7 @@ export default function LoginForm() {
       // Try both URLs simultaneously and use whichever responds first
       const res = await Promise.race([
         axios.post('http://localhost:8000/auth/login', formData),
-        axios.post('study-buddy-backend-qrwtro318-zackyviriots-projects.vercel.app/auth/login', formData)
+        axios.post('studybuddy-production-1dcc.up.railway.app/auth/login', formData)
       ]);
       
       const token = res.data.token;
