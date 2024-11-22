@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import PlannerPageHeader from "../PlannerPageHeader";
-import PlannerPageCalender from "./PlannerPageCalender";
-import PlannerTasks from "./PlannerTasks";
-import Timer from "./Timer";
-import NotesCanvas from "./NoteCanvas";
-import AddEventForm from "../../userDashboard/userDashboardComponents/Calender/AddEventForm";
+import PlannerPageHeader from "./plannerPageComponents/PlannerPageHeader";
+import PlannerPageCalender from "./plannerPageComponents/PlannerPageCalender";
+import PlannerTasks from "./plannerPageComponents/PlannerTasks";
+import Timer from "./plannerPageComponents/Timer";
+import NotesCanvas from "./plannerPageComponents/NoteCanvas";
+import AddEventForm from "../userDashboard/userDashboardComponents/Calender/AddEventForm";
 import { X } from "lucide-react";
 
 export default function PlannerPage() {
