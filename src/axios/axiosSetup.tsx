@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 //use https for productions
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://studybuddy-production-1dcc.up.railway.app' : 'http://localhost:8000';
+const baseURL = process.env.NODE_ENV === 'production' ? 'https:/studybuddy-production-1dcc.up.railway.app' : 'http://localhost:8000';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
