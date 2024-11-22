@@ -11,8 +11,7 @@ export default function UserDashboard() {
   const [userId, setUserId] = useState();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showEventModal, setShowEventModal] = useState(false);
-  //do the same thing for the study groups 
-  const [showStudyGroupModal,setShowStudyGroupModal] = useState(false);
+  const [showStudyGroupModal, setShowStudyGroupModal] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -47,8 +46,8 @@ export default function UserDashboard() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Calendar Section - Top on mobile, Right on desktop */}
           <div className="w-full lg:w-2/3 order-1 lg:order-2">
-            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-[calc(40vh)] lg:h-[calc(60vh-12rem)]">
-              <div className="p-4 h-full overflow-auto">
+            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-[600px]">
+              <div className="p-4 h-full">
                 <UserCalendar onAddEventClick={() => setShowEventModal(true)} />
               </div>
             </div>
@@ -56,8 +55,8 @@ export default function UserDashboard() {
 
           {/* Study Groups - Bottom on mobile, Left on desktop */}
           <div className="w-full lg:w-1/3 order-2 lg:order-1">
-            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-[calc(40vh)] lg:h-[calc(60vh-12rem)]">
-              <div className="p-4 h-full overflow-auto">
+            <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-[600px]">
+              <div className="p-4 h-full">
                 <UserStudyGroups />
               </div>
             </div>
@@ -92,8 +91,8 @@ export default function UserDashboard() {
           </div>
         )}
 
-          {/*Study Group Modal */}
-          {showStudyGroupModal && (
+        {/*Study Group Modal */}
+        {showStudyGroupModal && (
           <div 
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
             onClick={(e) => {
@@ -119,8 +118,6 @@ export default function UserDashboard() {
             </div>
           </div>
         )}
-
-        
       </div>
     </div>
   );
