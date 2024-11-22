@@ -37,7 +37,7 @@ export default function LoginForm() {
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="space-y-2">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="email" className="block hover text-sm font-medium text-gray-700">
           Email
         </label>
         <input
