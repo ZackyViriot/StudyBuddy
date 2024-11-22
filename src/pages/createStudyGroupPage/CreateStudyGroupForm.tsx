@@ -2,6 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import React, { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import axiosInstance from "../../axios/axiosSetup";
 
 type MeetingType = 'online' | 'in-person' | 'both';
 
@@ -68,7 +69,7 @@ export default function CreateStudyGroupForm() {
 
         try {
             console.log("Sending data:", data);
-            const res = await axios.post('http://localhost:8000/studyGroup', data, {
+            const res = await axiosInstance.post('/studyGroup', data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}` // Add token for authentication

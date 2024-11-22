@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import axiosInstance from '../../../axios/axiosSetup';
 
 interface Event {
     _id: string;
@@ -32,7 +33,7 @@ const PlannerTasks: React.FC<PlannerTasksProps> = ({ selectedDate, onAddEventCli
                 const decoded: any = jwtDecode(token);
                 const userId = decoded.id;
 
-                const res = await axios.get(`http://localhost:8000/Event/user?userId=${userId}`, {
+                const res = await axiosInstance.get(`/Event/user?userId=${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

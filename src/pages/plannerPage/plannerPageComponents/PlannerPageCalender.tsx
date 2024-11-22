@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../../axios/axiosSetup";
 import { jwtDecode } from 'jwt-decode';
 
 interface CalendarEvent {
@@ -40,7 +40,7 @@ const PlannerPageCalender: React.FC<CalendarProps> = ({
                 const decoded: any = jwtDecode(token);
                 const userId = decoded.id;
 
-                const res = await axios.get(`http://localhost:8000/Event/user?userId=${userId}`, {
+                const res = await axiosInstance.get(`/Event/user?userId=${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

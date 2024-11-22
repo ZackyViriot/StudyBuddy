@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
+import axiosInstance from "../../../../axios/axiosSetup";
 
 interface CalendarEvent {
   _id: string;
@@ -37,7 +38,7 @@ const UserCalendar: React.FC<CalendarProps> = ({ initialDate = new Date(), onAdd
         const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-        const res = await axios.get(`http://localhost:8000/Event/user?userId=${userId}`, {
+        const res = await axiosInstance.get(`/Event/user?userId=${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

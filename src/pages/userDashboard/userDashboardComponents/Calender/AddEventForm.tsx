@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CalendarIcon, ClockIcon, TagIcon, CheckCircleIcon } from 'lucide-react';
+import axiosInstance from "../../../../axios/axiosSetup";
 
 interface Event {
   title: string;
@@ -89,7 +90,7 @@ export default function AddEventForm({ onEventAdded, onClose }: AddEventFormProp
     };
   
     try {
-      const res = await axios.post('http://localhost:8000/Event', payload, {
+      const res = await axiosInstance.post('/Event', payload, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`

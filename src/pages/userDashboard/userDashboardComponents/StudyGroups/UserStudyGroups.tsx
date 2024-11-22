@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../../../axios/axiosSetup";
 import {jwtDecode} from 'jwt-decode';
 import React,{useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ export default function UserStudyGroups(){
             const userId = decoded.id;
             setUserId(userId);
     
-            const res = await axios.get(`http://localhost:8000/studyGroup/user?userId=${userId}`, {
+            const res = await axiosInstance.get(`/studyGroup/user?userId=${userId}`, {
               headers: {
                 Authorization: `Bearer ${token}`
               }
