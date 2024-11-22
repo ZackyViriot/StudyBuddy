@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import axiosInstance from '../../axios/axiosSetup';
 
 interface Message {
   _id: string;
@@ -52,7 +53,7 @@ const StudyGroupChat: React.FC = () => {
 
     const fetchStudyGroup = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/studyGroup/${studyGroupId}`);
+        const response = await axiosInstance.get(`/studyGroup/${studyGroupId}`);
         setStudyGroup(response.data);
       } catch (error) {
         console.error('Error fetching study group:', error);
@@ -61,7 +62,8 @@ const StudyGroupChat: React.FC = () => {
 
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/chat/messages/${studyGroupId}`, {
+        const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:8000';
+        const response = await axiosInstance.get(`${socketUrl}/chat/messages/${studyGroupId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         console.log('Fetched messages:', response.data);
@@ -74,7 +76,8 @@ const StudyGroupChat: React.FC = () => {
     fetchStudyGroup();
     fetchMessages();
 
-    const newSocket = io('http://localhost:8000/chat', {
+    const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:8000';
+    const newSocket = io(`${socketUrl}/chat`, {
       transports: ['websocket'],
       query: { studyGroupId },
       auth: { token },
