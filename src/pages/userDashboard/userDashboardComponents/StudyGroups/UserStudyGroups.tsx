@@ -4,8 +4,6 @@ import React,{useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import UserStudyGroupCard from "./UserStudyGroupCard";
 
-
-
 interface StudyGroup {
     _id:string;
     name?:string;
@@ -16,14 +14,17 @@ interface StudyGroup {
     memebers:string[];
 }
 
-export default function UserStudyGroups(){
+interface UserStudyGroupsProps {
+    onCreateGroup: () => void;
+}
+
+export default function UserStudyGroups({ onCreateGroup }: UserStudyGroupsProps){
     const [userId,setUserId] = useState("");
     const [studyGroups, setStudyGroups] = useState<StudyGroup[]>([]);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    // need to get the user information 
     useEffect(() => {
         const fetchUserInfo = async () => {
           try {
@@ -67,10 +68,13 @@ export default function UserStudyGroups(){
       if(error){
         return <p>Error: {error}</p>
       }
+      
       return ( 
         <div>
-            <UserStudyGroupCard studyGroups={studyGroups}/>
+            <UserStudyGroupCard 
+                studyGroups={studyGroups}
+                onCreateGroup={onCreateGroup}
+            />
         </div>
       )
-
 }

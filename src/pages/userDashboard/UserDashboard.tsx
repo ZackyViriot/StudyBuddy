@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import UserDashboardHeader from "./userDashboardComponents/UserDashboardHeader";
 import UserCalendar from "./userDashboardComponents/Calender/UserCalendar";
 import AddEventForm from "./userDashboardComponents/Calender/AddEventForm";
-import AddStudyGroupForm from "./userDashboardComponents/StudyGroups/AddStudyGroupForm";
+import CreateStudyGroupForm from "./userDashboardComponents/StudyGroups/CreateStudyGroupForm";
 import UserStudyGroups from "./userDashboardComponents/StudyGroups/UserStudyGroups";
 import { X } from "lucide-react";
 
@@ -31,9 +31,13 @@ export default function UserDashboard() {
     setShowEventModal(false);
   };
 
-  const handleStudyGroupAdded = () => {
+  const handleStudyGroupCreated = () => {
     setShowStudyGroupModal(false);
-  }
+  };
+
+  const handleCreateGroup = () => {
+    setShowStudyGroupModal(true);
+  };
 
   return (
     <div className="min-h-screen">
@@ -42,7 +46,6 @@ export default function UserDashboard() {
       </div>
 
       <div className="container mx-auto mt-20 px-4 max-w-7xl">
-        {/* Main content area with responsive layout */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Calendar Section - Top on mobile, Right on desktop */}
           <div className="w-full lg:w-2/3 order-1 lg:order-2">
@@ -53,11 +56,14 @@ export default function UserDashboard() {
             </div>
           </div>
 
-          {/* Study Groups - Bottom on mobile, Left on desktop */}
+          {/* Study Groups Section */}
           <div className="w-full lg:w-1/3 order-2 lg:order-1">
             <div className="bg-white rounded-lg shadow-xl hover:shadow-md transition-shadow duration-200 h-[600px]">
               <div className="p-4 h-full">
-                <UserStudyGroups />
+                <div className="mb-4">
+                  <h2 className="text-xl font-semibold">Study Groups</h2>
+                </div>
+                <UserStudyGroups onCreateGroup={handleCreateGroup} />
               </div>
             </div>
           </div>
@@ -91,7 +97,7 @@ export default function UserDashboard() {
           </div>
         )}
 
-        {/*Study Group Modal */}
+        {/* Study Group Modal */}
         {showStudyGroupModal && (
           <div 
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
@@ -109,9 +115,9 @@ export default function UserDashboard() {
                 <X size={24} />
               </button>
               <div className="p-6">
-                <h2 className="text-xl font-semibold mb-4">Add New Study Group</h2>
-                <AddStudyGroupForm 
-                  onStudyGroupAdded={handleStudyGroupAdded}
+                <h2 className="text-xl font-semibold mb-4">Create Study Group</h2>
+                <CreateStudyGroupForm 
+                  onStudyGroupCreated={handleStudyGroupCreated}
                   onClose={() => setShowStudyGroupModal(false)}
                 />
               </div>
@@ -122,5 +128,3 @@ export default function UserDashboard() {
     </div>
   );
 }
-
-
