@@ -8,6 +8,7 @@ import UserDashboard from "./pages/userDashboard/UserDashboard";
 import PrivateRoute from "./PrivateRoute";
 import StudyGroupChat from "./pages/chatRoom/ChatComponent";
 import PlannerPage from "./pages/plannerPage/PlannerPage";
+import MyStudyGroupsPage from "./pages/myStudyGroupsPage/MyStudyGroupsPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/UserDashboard' element={<UserDashboard />} />
           <Route path='/chat/:studyGroupId' element = {<StudyGroupChat/>}/>
           <Route path = '/plannerPage' element= {<PlannerPage/>}/>
+          <Route path = '/myStudyGroups' element = {<MyStudyGroupsPage/>}/>
 
         </Route>
       </Routes>
