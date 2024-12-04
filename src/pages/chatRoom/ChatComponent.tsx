@@ -43,6 +43,27 @@ const StudyGroupChat: React.FC = () => {
     });
   }, []);
 
+  const fetchMessages = async () => {
+    try {
+      const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:8000';
+      const response = await axiosInstance.get(`${socketUrl}/chat/messages/${studyGroupId}`);
+      setMessages(response.data);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
+  };
+
+  // Add periodic message fetching
+  useEffect(() => {
+    fetchMessages(); // Initial fetch
+
+    const intervalId = setInterval(() => {
+      fetchMessages();
+    }, 2000); // Fetch every 2 seconds
+
+    return () => clearInterval(intervalId);
+  }, [studyGroupId]);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -62,18 +83,7 @@ const StudyGroupChat: React.FC = () => {
       }
     };
 
-    const fetchMessages = async () => {
-      try {
-        const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:8000';
-        const response = await axiosInstance.get(`${socketUrl}/chat/messages/${studyGroupId}`);
-        setMessages(response.data);
-      } catch (error) {
-        console.error('Error fetching messages:', error);
-      }
-    };
-
     fetchStudyGroup();
-    fetchMessages();
 
     const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:8000';
     const newSocket = io(`${socketUrl}/chat`, {
@@ -104,7 +114,6 @@ const StudyGroupChat: React.FC = () => {
       );
       addMessage(message);
       
-      // Remove typing indicator for the user who sent the message
       setTypingUsers(prev => {
         const newSet = new Set(prev);
         newSet.delete(message.username);
@@ -124,12 +133,10 @@ const StudyGroupChat: React.FC = () => {
           return newSet;
         });
 
-        // Clear existing timeout for this user if it exists
         if (typingTimeoutRef.current[data.username]) {
           clearTimeout(typingTimeoutRef.current[data.username]);
         }
 
-        // Set new timeout to remove typing indicator
         if (data.isTyping) {
           typingTimeoutRef.current[data.username] = setTimeout(() => {
             setTypingUsers(prev => {
@@ -170,7 +177,6 @@ const StudyGroupChat: React.FC = () => {
     }
   };
 
-  // Add debounced stop typing
   useEffect(() => {
     const stopTypingTimeout = setTimeout(() => {
       if (socket) {
