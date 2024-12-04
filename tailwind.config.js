@@ -14,7 +14,7 @@ module.exports = {
             transform: 'translateY(0)'
           },
         },
-        'fade-down': {  // Add this
+        'fade-down': {
           '0%': {
             opacity: '0',
             transform: 'translateY(-10px)'
@@ -24,7 +24,7 @@ module.exports = {
             transform: 'translateY(0)'
           },
         },
-        'fade-right': {  // Add this
+        'fade-right': {
           '0%': {
             opacity: '0',
             transform: 'translateX(-10px)'
@@ -34,7 +34,7 @@ module.exports = {
             transform: 'translateX(0)'
           },
         },
-        'fade-left': {  // Add this
+        'fade-left': {
           '0%': {
             opacity: '0',
             transform: 'translateX(10px)'
@@ -62,14 +62,23 @@ module.exports = {
             transform: 'scale(1)'
           },
         },
+        'pulse': {
+          '0%, 100%': {
+            opacity: '1'
+          },
+          '50%': {
+            opacity: '.5'
+          },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.5s ease-out',
-        'fade-down': 'fade-down 0.5s ease-out',    // Add this
-        'fade-right': 'fade-right 0.5s ease-out',  // Add this
-        'fade-left': 'fade-left 0.5s ease-out',    // Add this
+        'fade-down': 'fade-down 0.5s ease-out',
+        'fade-right': 'fade-right 0.5s ease-out',
+        'fade-left': 'fade-left 0.5s ease-out',
         'fade': 'fade 0.3s ease-out',
         'scale-up': 'scale-up 0.3s ease-out',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },
