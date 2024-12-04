@@ -1,9 +1,16 @@
 import React,{useState} from "react";
 import {BookOpen, Menu, X} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 export default function MyStudyGroupsHeader(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };  
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -24,7 +31,7 @@ export default function MyStudyGroupsHeader(){
                         <a href="/userDashboard" className="text-sm font-medium hover:text-blue-600">Dashboard</a>
                         <a href="/plannerPage" className="text-sm font-medium hover:text-blue-600">Planner</a>
                         <a href="/myStudyGroups" className="text-sm font-medium hover:text-blue-600">Study Groups</a>
-                        <a href="/userSetting" className="text-sm font-medium hover:text-blue-600">Settings</a>
+                        <a onClick={handleLogout} className="text-sm font-medium hover:text-blue-600">Logout</a>
                     </nav>
 
                     {/* Mobile Menu Button */}
@@ -68,11 +75,11 @@ export default function MyStudyGroupsHeader(){
                                 Study Groups
                             </a>
                             <a 
-                                href="/userSetting" 
+                                onClick={handleLogout} 
                                 className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-lg"
-                                onClick={() => setIsMenuOpen(false)}
+
                             >
-                                Settings
+                                Logout
                             </a>
                         </nav>
                     </div>

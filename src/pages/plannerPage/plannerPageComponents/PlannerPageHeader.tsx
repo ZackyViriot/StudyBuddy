@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { BookOpen, Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function PlannerPageHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };  
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 lg:px-6 h-16 flex items-center">
@@ -17,7 +24,7 @@ export default function PlannerPageHeader() {
                     <a href="/userDashboard" className="text-sm font-medium hover:text-blue-600">Dashboard</a>
                     <a href="/plannerPage" className="text-sm font-medium hover:text-blue-600">Planner</a>
                     <a href="/myStudyGroups" className="text-sm font-medium hover:text-blue-600">Study Groups</a>
-                    <a href="/userSetting" className="text-sm font-medium hover:text-blue-600">Settings</a>
+                    <a onClick={handleLogout} className="text-sm font-medium hover:text-blue-600">Logout</a>
                 </nav>
 
                 {/* Mobile Menu Button */}
@@ -44,9 +51,9 @@ export default function PlannerPageHeader() {
                                className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-lg">
                                 Study Groups
                             </a>
-                            <a href="/userSetting" 
+                            <a onClick={handleLogout} 
                                className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-lg">
-                                Settings
+                                Logout
                             </a>
                         </nav>
                     </div>
